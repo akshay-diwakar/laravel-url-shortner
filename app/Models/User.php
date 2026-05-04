@@ -7,6 +7,9 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Company;
+use App\Models\ShortUrl;
+use App\Models\Invitation;
 
 class User extends Authenticatable
 {
@@ -45,5 +48,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function shortUrls()
+    {
+        return $this->hasMany(ShortUrl::class, 'created_by');
+    }
+
+    public function invitationsSent()
+    {
+        return $this->hasMany(Invitation::class, 'invited_by');
     }
 }
