@@ -15,7 +15,7 @@
 
                 <label>Enter URL</label>
                 <br><br>
-                <input type="text" name="url" placeholder="https://example.com" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:4px;">
+                <input type="url" name="url" placeholder="https://example.com" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:4px;">
             </div>
 
             <button style="background:#111827;color:white;padding:10px 18px;border:none;border-radius:4px;cursor:pointer;"> Generate Short URL</button>

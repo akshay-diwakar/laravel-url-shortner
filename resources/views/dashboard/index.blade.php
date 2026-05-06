@@ -43,18 +43,18 @@
         <table style="border-collapse: collapse; width: 900px; margin-top: 15px;">
             <thead>
                 <tr>
-                    <th>Company</th>
-                    <th>Total Users</th>
-                    <th>Total URLs</th>
+                    <th style="border:1px solid #ccc; padding:10px; background:#f3f4f6;">Company</th>
+                    <th style="border:1px solid #ccc; padding:10px; background:#f3f4f6;">Total Users</th>
+                    <th style="border:1px solid #ccc; padding:10px; background:#f3f4f6;">Total URLs</th>
                 </tr>
             </thead>
 
             <tbody>
                 @forelse($data['companies'] as $company)
                     <tr>
-                        <td>{{ $company->name }}</td>
-                        <td>{{ $company->users_count }}</td>
-                        <td>{{ $company->short_urls_count }}</td>
+                        <td style="border:1px solid #ccc; padding:10px;">{{ $company->name }}</td>
+                        <td style="border:1px solid #ccc; padding:10px;">{{ $company->users_count }}</td>
+                        <td style="border:1px solid #ccc; padding:10px;">{{ $company->short_urls_count }}</td>
                     </tr>
                 @empty
                     <tr>

@@ -4,10 +4,9 @@
         <h2>Invite User</h2>
     </x-slot>
 
-    <x-alert />
 
     <div style="padding:20px;width:450px;background:white;border:1px solid #ddd;border-radius:8px;">
-
+        <x-alert />
         <form method="POST" action="{{ route('invitations.store') }}">
             @csrf
 
