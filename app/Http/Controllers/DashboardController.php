@@ -23,12 +23,12 @@ class DashboardController extends Controller
 
         } elseif ($user->role === 'Admin') {
 
-            $data['urls'] = ShortUrl::where('company_id', $user->company_id)->get();
-            $data['team'] = $user->company->users;
+            $data['urls'] = ShortUrl::where('company_id', '!=', $user->company_id)->get();
+            $data['team'] = $user->company ? $user->company->users : collect();
 
         } elseif ($user->role === 'Member') {
 
-            $data['urls'] = ShortUrl::where('created_by', $user->id)->get();
+            $data['urls'] = ShortUrl::where('created_by', '!=', $user->id)->get();
         }
 
         return view('dashboard.index', compact('data', 'user'));
