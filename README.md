@@ -8,7 +8,7 @@ A Laravel-based URL shortener system with role-based access control and company 
 
 * Authentication (Login / Logout)
 * Role-based authorization
-* Multiple companies support
+* Multi-company support with isolated data per company
 * Invitation system
 * Short URL generation
 * Protected short URL redirection
@@ -34,7 +34,7 @@ A Laravel-based URL shortener system with role-based access control and company 
 ### Member
 
 * Can create short URLs
-* Can only view URLs created by themselves
+* Can only view URLs created by them
 
 ---
 
@@ -42,7 +42,7 @@ A Laravel-based URL shortener system with role-based access control and company 
 
 * Laravel 12
 * PHP
-* MySQL / SQLite
+* MySQL
 * Blade Templates
 
 ---
@@ -113,16 +113,29 @@ Unauthenticated users cannot access redirect routes.
 
 ---
 
+## Short Code Design
+
+Each shortened URL is represented using a unique `short_code`.
+
+- Generated using random strings
+- Ensured uniqueness via database checks
+- Used as the lookup key for redirection
+
+This approach improves security (prevents predictable URLs) and performance (indexed lookup).
+
+---
+
 ## AI Usage Disclosure
 
-The following AI tools were used during development for learning, debugging, and implementation guidance:
+The following AI tools were used for guidance, debugging, and improving implementation quality:
 
-Used Gemini to review and improve the database schema design, including indexing, uniqueness constraints, and data types.
-Used Gemini to better understand short URL generation, short_code handling, uniqueness checks, and redirect flow.
-Used ChatGPT for understanding and implementing role-based access control and protected short URL redirection.
-Used ChatGPT to understand and implement the invitation flow and related database relationships.
-Used ChatGPT for debugging issues and improving form and listing page structure.
-Used ChatGPT to improve and structure the README documentation.
+* Used Gemini to review and enhance the database schema design (indexing, uniqueness, and data types).
+* Used Gemini to understand short_code generation, uniqueness handling, and redirect logic.
+* Used ChatGPT to resolve Git issues (e.g., unrelated histories) during repository setup.
+* Used ChatGPT to implement role-based access control and protected URL redirection.
+* Used ChatGPT to design and validate the invitation flow and related database relationships.
+* Used ChatGPT for debugging issues and improving form handling and listing structure.
+* Used ChatGPT to refine and structure project documentation (README).
 
+All core logic, implementation, and testing were done independently.
 
-Overall project structure, logic, implementation, testing, and debugging were completed manually.
