@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ShortUrlController;
+use App\Http\Controllers\InvitationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,7 +20,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [ShortUrlController::class, 'index'])->name('short-urls.index');
         Route::get('/create', [ShortUrlController::class, 'create'])->name('short-urls.create');
         Route::post('/', [ShortUrlController::class, 'store'])->name('short-urls.store');
+    });
 
+    // invitations
+    Route::prefix('invitations')->group(function () {
+
+        Route::get('/create', [InvitationController::class, 'create'])->name('invitations.create');
+        Route::post('/', [InvitationController::class, 'store'])->name('invitations.store');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

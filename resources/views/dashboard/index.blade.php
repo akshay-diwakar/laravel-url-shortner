@@ -4,9 +4,19 @@
     <h2>Dashboard</h2>
 </x-slot>
 
+@if(session('success'))
+    <p style="color: green">{{ session('success') }}</p>
+@endif
+
 <a href="{{ route('short-urls.index') }}">
     <button>View Short URLs</button>
 </a>
+
+@if(in_array($user->role, ['SuperAdmin','Admin']))
+    <a href="{{ route('invitations.create') }}">
+        <button>Invite User</button>
+    </a>
+@endif
 
 @if(in_array($user->role, ['Admin','Manager']))
     <a href="{{ route('short-urls.create') }}">
@@ -14,9 +24,6 @@
     </a>
 @endif
 
-@if(session('success'))
-    <p style="color: green">{{ session('success') }}</p>
-@endif
 
 @if($user->role === 'SuperAdmin')
 
