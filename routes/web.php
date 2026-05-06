@@ -36,7 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware('auth')->get('/s/{code}', function ($code) {
     $url = \App\Models\ShortUrl::where('short_code', $code)->firstOrFail();
-    return redirect($url->original_url);
+    return redirect()->away($url->original_url);
 });
 
 require __DIR__.'/auth.php';

@@ -19,16 +19,16 @@ class DashboardController extends Controller
 
             $data['companies'] = Company::withCount('users')
                 ->withCount('shortUrls')
-                ->get();
+                ->latest()->paginate(5);
 
         } elseif ($user->role === 'Admin') {
 
-            $data['urls'] = ShortUrl::where('company_id', '!=', $user->company_id)->get();
+            $data['urls'] = ShortUrl::where('company_id', $user->company_id)->latest()->paginate(5);
             $data['team'] = $user->company ? $user->company->users : collect();
-
+        
         } elseif ($user->role === 'Member') {
 
-            $data['urls'] = ShortUrl::where('created_by', '!=', $user->id)->get();
+            $data['urls'] = ShortUrl::where('created_by', $user->id)->latest()->paginate(5);
         }
 
         return view('dashboard.index', compact('data', 'user'));

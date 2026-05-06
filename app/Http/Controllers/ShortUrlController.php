@@ -13,15 +13,13 @@ class ShortUrlController extends Controller
         $user = auth()->user();
 
         if ($user->role === 'SuperAdmin') {
-            abort(403, 'SuperAdmin cannot view all URLs');
-        }
-
-        if ($user->role === 'Admin') {
-            $urls = \App\Models\ShortUrl::where('company_id', '!=', $user->company_id)->get();
+            $urls = ShortUrl::with(['user', 'company'])->latest()->paginate(10);
+        } elseif ($user->role === 'Admin') {
+            $urls = ShortUrl::with(['user', 'company'])->where('company_id', $user->company_id)->latest()->paginate(10);
         } elseif ($user->role === 'Member') {
-            $urls = \App\Models\ShortUrl::where('created_by', '!=', $user->id)->get();
+            $urls = ShortUrl::with(['user', 'company'])->where('created_by', $user->id)->latest()->paginate(10);
         } else {
-            $urls = collect();
+            abort(403);
         }
 
         return view('short_urls.index', compact('urls', 'user'));
@@ -58,9 +56,13 @@ class ShortUrlController extends Controller
             'url' => 'required|url'
         ]);
 
+        do {
+            $code = Str::random(6);
+        } while (ShortUrl::where('short_code', $code)->exists());
+        
         ShortUrl::create([
             'original_url' => $request->url,
-            'short_code'   => Str::random(6),
+            'short_code'   => $code,
             'created_by'   => $user->id,
             'company_id'   => $user->company_id
         ]);

@@ -4,22 +4,21 @@
         <h2>Create Short URL</h2>
     </x-slot>
 
-    <div class="p-6">
+    <div style="padding:20px;width:450px;background:white;border:1px solid #ddd;border-radius:8px;">
 
-        @if(session('success'))
-            <p style="color: green">{{ session('success') }}</p>
-        @endif
+        <x-alert />
 
         <form method="POST" action="{{ route('short-urls.store') }}">
             @csrf
 
-            <input type="text" name="url" placeholder="Enter URL" style="width:300px">
+            <div style="margin-bottom:15px;">
 
-            @error('url')
-                <p style="color:red">{{ $message }}</p>
-            @enderror
+                <label>Enter URL</label>
+                <br><br>
+                <input type="text" name="url" placeholder="https://example.com" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:4px;">
+            </div>
 
-            <button type="submit">Generate</button>
+            <button style="background:#111827;color:white;padding:10px 18px;border:none;border-radius:4px;cursor:pointer;"> Generate Short URL</button>
         </form>
 
     </div>
