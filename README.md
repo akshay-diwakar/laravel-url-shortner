@@ -1,23 +1,24 @@
 # URL Shortener System
 
-A Laravel-based URL shortener system with role-based access control and company management.
+A Laravel-based URL shortener system with role-based access control and multi-company support.
 
 ---
 
 ## Features
 
-* Authentication (Login / Logout)
-* Role-based authorization
-* Multi-company support with isolated data per company
-* Invitation system
-* Short URL generation
-* Protected short URL redirection
-* Pagination support
-* Dashboard management
+- Authentication (Login / Logout)
+- Role-based authorization
+- Multi-company architecture
+- Invitation system
+- Short URL generation
+- Protected short URL redirection
+- Pagination support
+- Dashboard management
+- Seeded demo data for testing
 
 ---
 
-## Roles
+## Roles & Permissions
 
 ### SuperAdmin
 
@@ -27,14 +28,14 @@ A Laravel-based URL shortener system with role-based access control and company 
 
 ### Admin
 
-* Can create short URLs
-* Can invite Admin and Member users in their own company
-* Can only view URLs from their own company
+- Can create short URLs
+- Can invite Admin and Member users within their own company
+- Can only view URLs created within their own company
 
 ### Member
 
 * Can create short URLs
-* Can only view URLs created by them
+* Can only view URLs created by themselves
 
 ---
 
@@ -52,19 +53,24 @@ A Laravel-based URL shortener system with role-based access control and company 
 Clone the repository:
 
 ```bash
-git clone <your-github-repo-url>
+git clone https://github.com/akshay-diwakar/laravel-url-shortner.git
 ```
 
-Go into project folder:
+Move into the project directory:
 
 ```bash
-cd project-name
+cd laravel-url-shortner
 ```
 
-Install dependencies:
+Install PHP dependencies:
 
 ```bash
 composer install
+```
+
+Install frontend dependencies:
+
+```bash
 npm install
 ```
 
@@ -86,6 +92,12 @@ Run migrations and seeders:
 
 ```bash
 php artisan migrate:fresh --seed
+```
+
+Start Vite development server:
+
+```bash
+npm run dev
 ```
 
 Start development server:
@@ -153,5 +165,5 @@ The following AI tools were used for guidance, debugging, and improving implemen
 * Used ChatGPT for debugging issues and improving form handling and listing structure.
 * Used ChatGPT to refine and structure project documentation (README).
 
-All core logic, implementation, and testing were done independently.
+Overall project architecture, implementation logic, testing, debugging, and integration were completed manually.
 
