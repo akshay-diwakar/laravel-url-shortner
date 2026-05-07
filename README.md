@@ -96,10 +96,26 @@ php artisan serve
 
 ---
 
-## SuperAdmin Credentials
+## Demo Credentials
+
+SuperAdmin:
 
 ```text
 Email: superadmin@example.com
+Password: password
+```
+
+Admin:
+
+```text
+Email: admin1@example.com
+Password: password
+```
+
+Member:
+
+```text
+Email: member1@example.com
 Password: password
 ```
 
