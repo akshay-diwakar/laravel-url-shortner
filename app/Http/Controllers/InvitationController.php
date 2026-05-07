@@ -40,7 +40,7 @@ class InvitationController extends Controller
                 abort(403, 'SuperAdmin can only invite Admin');
             }
 
-            $company = Company::create([
+            $company = Company::firstOrCreate([
                 'name' => $request->company_name
             ]);
 
