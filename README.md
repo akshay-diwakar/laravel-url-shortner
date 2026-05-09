@@ -22,21 +22,30 @@ A Laravel-based URL shortener system with role-based access control and multi-co
 
 ### SuperAdmin
 
-* Can invite Admin users in new companies
-* Can view all short URLs
-* Cannot create short URLs
+- Can invite Admin users
+- Can view all short URLs
+- Cannot create short URLs
 
 ### Admin
 
 - Can create short URLs
-- Can invite Admin and Member users within their own company
-- Can only view URLs created within their own company
+- Can invite Admin, Member, Manager, and Sales users within their own company
+- Can only view short URLs not created within their own company
 
 ### Member
 
-* Can create short URLs
-* Can only view URLs created by themselves
+- Can create short URLs
+- Can only view short URLs not created by themselves
 
+### Manager
+
+- Can view short URLs not created within their own company
+- Cannot create short URLs
+
+### Sales
+
+- Can view short URLs not created by themselves
+- Cannot create short URLs
 ---
 
 ## Tech Stack
@@ -135,9 +144,11 @@ Password: password
 
 ## Protected Short URLs
 
-Short URLs are protected behind authentication middleware.
+Short URLs are protected using authentication middleware.
 
-Unauthenticated users cannot access redirect routes.
+Users must be logged in to access redirect routes.
+
+Unauthenticated users are redirected to the login page.
 
 ---
 
@@ -155,15 +166,12 @@ This approach improves security (prevents predictable URLs) and performance (ind
 
 ## AI Usage Disclosure
 
-The following AI tools were used for guidance, debugging, and improving implementation quality:
+The following AI tools were used for learning, debugging, and implementation guidance:
 
-* Used Gemini to review and enhance the database schema design (indexing, uniqueness, and data types).
-* Used Gemini to understand short_code generation, uniqueness handling, and redirect logic.
-* Used ChatGPT to resolve Git issues (e.g., unrelated histories) during repository setup.
-* Used ChatGPT to implement role-based access control and protected URL redirection.
-* Used ChatGPT to design and validate the invitation flow and related database relationships.
-* Used ChatGPT for debugging issues and improving form handling and listing structure.
-* Used ChatGPT to refine and structure project documentation (README).
+- Used Gemini to review database schema decisions and short code generation approaches.
+- Used ChatGPT to understand invitation flow structure and role-based access handling.
+- Used ChatGPT for debugging issues and improving form handling and UI structure.
+- Used ChatGPT to help structure the project documentation (README).
 
-Overall project architecture, implementation logic, testing, debugging, and integration were completed manually.
+Overall application logic, implementation, testing, and integration were completed manually.
 
