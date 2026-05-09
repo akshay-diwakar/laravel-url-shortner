@@ -21,14 +21,14 @@ class DashboardController extends Controller
                 ->withCount('shortUrls')
                 ->latest()->paginate(5);
 
-        } elseif ($user->role === 'Admin') {
+        } elseif (in_array($user->role, ['Admin', 'Manager'])) {
 
-            $data['urls'] = ShortUrl::where('company_id', $user->company_id)->latest()->paginate(5);
+            $data['urls'] = ShortUrl::where('company_id','!=',$user->company_id)->latest()->paginate(5);
             $data['team'] = $user->company ? $user->company->users : collect();
         
-        } elseif ($user->role === 'Member') {
+        } elseif (in_array($user->role, ['Member', 'Sales'])) {
 
-            $data['urls'] = ShortUrl::where('created_by', $user->id)->latest()->paginate(5);
+            $data['urls'] = ShortUrl::where('created_by','!=', $user->id)->latest()->paginate(5);
         }
 
         return view('dashboard.index', compact('data', 'user'));

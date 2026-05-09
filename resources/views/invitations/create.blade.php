@@ -18,9 +18,15 @@
 
             @if($user->role === 'SuperAdmin')
                 <div style="margin-bottom:15px;">
-                    <label>Company Name</label>
+                    <label>Select Company</label>
                     <br><br>
-                    <input type="text"  style="width:100%;padding:10px;border:1px solid #ccc;border-radius:4px;" name="company_name" placeholder="Enter Company Name">
+                    <select name="company_id" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:4px;">
+                        @foreach($companies as $company)
+                            <option value="{{ $company->id }}">
+                                {{ $company->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             @endif
 
@@ -36,6 +42,8 @@
                     @if($user->role === 'Admin')
                         <option value="Admin">Admin</option>
                         <option value="Member">Member</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Sales">Sales</option>
                     @endif
                 </select>
             </div>

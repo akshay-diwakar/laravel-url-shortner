@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->enum('role', ['SuperAdmin','Admin','Member']);
+            $table->enum('role', ['SuperAdmin','Admin','Member','Manager','Sales']);
             $table->unsignedBigInteger('company_id')->index();
             $table->unsignedBigInteger('invited_by');
  

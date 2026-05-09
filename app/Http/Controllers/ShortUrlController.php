@@ -15,9 +15,9 @@ class ShortUrlController extends Controller
         if ($user->role === 'SuperAdmin') {
             $urls = ShortUrl::with(['user', 'company'])->latest()->paginate(10);
         } elseif ($user->role === 'Admin') {
-            $urls = ShortUrl::with(['user', 'company'])->where('company_id', $user->company_id)->latest()->paginate(10);
+            $urls = ShortUrl::with(['user', 'company'])->where('company_id','!=',$user->company_id)->latest()->paginate(10);
         } elseif ($user->role === 'Member') {
-            $urls = ShortUrl::with(['user', 'company'])->where('created_by', $user->id)->latest()->paginate(10);
+            $urls = ShortUrl::with(['user', 'company'])->where('created_by','!=',$user->id)->latest()->paginate(10);
         } else {
             abort(403);
         }

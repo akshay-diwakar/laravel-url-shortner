@@ -16,7 +16,13 @@ class InvitationController extends Controller
             abort(403);
         }
 
-        return view('invitations.create', compact('user'));
+        $companies = [];
+
+        if ($user->role === 'SuperAdmin') {
+            $companies = Company::all();
+        }
+
+        return view('invitations.create', compact('user','companies'));
     }
 
     public function store(Request $request)
@@ -25,11 +31,11 @@ class InvitationController extends Controller
 
         $rules = [
             'email' => 'required|email',
-            'role'  => 'required',
+            'role' => 'required|in:Admin,Member,Manager,Sales'
         ];
 
         if ($user->role === 'SuperAdmin') {
-            $rules['company_name'] = 'required|string';
+            $rules['company_id'] = 'required|exists:companies,id';
         }
 
         $request->validate($rules);
@@ -40,9 +46,7 @@ class InvitationController extends Controller
                 abort(403, 'SuperAdmin can only invite Admin');
             }
 
-            $company = Company::firstOrCreate([
-                'name' => $request->company_name
-            ]);
+            $company = Company::findOrFail($request->company_id);
 
             Invitation::create([
                 'email' => $request->email,
@@ -52,7 +56,7 @@ class InvitationController extends Controller
             ]);
         } elseif ($user->role === 'Admin') {
 
-            if (!in_array($request->role, ['Admin', 'Member'])) {
+            if (!in_array($request->role, ['Admin','Member','Manager','Sales'])) {
                 abort(403);
             }
 

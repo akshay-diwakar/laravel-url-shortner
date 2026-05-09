@@ -72,7 +72,7 @@
 
     @if($user->role === 'Admin')
 
-        <h3 style="margin-bottom:10px;">Generated Short URLs</h3>
+        <h3 style="margin-bottom:10px;">Other Companies URLs</h3>
 
         <table style="border-collapse: collapse; width: 900px; margin-top: 15px;">
             <thead>
@@ -135,7 +135,7 @@
 
     @if($user->role === 'Member')
 
-        <h3 style="margin-bottom:10px;">Your URLs</h3>
+        <h3 style="margin-bottom:10px;">Other Users URLs</h3>
 
         <table style="border-collapse: collapse; width: 900px; margin-top: 15px;">
             <thead>

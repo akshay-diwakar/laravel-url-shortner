@@ -54,6 +54,22 @@ class DemoDataSeeder extends Seeder
             'company_id' => $company2->id
         ]);
 
+        User::create([
+            'name' => 'Manager User',
+            'email' => 'manager@example.com',
+            'password' => bcrypt('password'),
+            'role' => 'Manager',
+            'company_id' => $company1->id
+        ]);
+
+        User::create([
+            'name' => 'Sales User',
+            'email' => 'sales@example.com',
+            'password' => bcrypt('password'),
+            'role' => 'Sales',
+            'company_id' => $company1->id
+        ]);
+
         // Short URLs
         ShortUrl::create([
             'original_url' => 'https://google.com',
